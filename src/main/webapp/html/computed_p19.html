@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script type="text/javascript" src="../vuejs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>名：<input v-model="firstName"/></h3><br>
+        <h3>姓：<input v-model="lastName"/></h3><br>
+<!--        <h3>姓名：{{lastName}}-{{firstName}}</h3>-->
+        <h3><input v-model="fullName"></h3>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data(){
+                return{
+                    firstName:"天容",
+                    lastName:"张"
+                }
+            },
+            methods:{
+
+            },
+            computed:{
+                fullName:{
+                    get(){
+                        console.log("get被调用了")
+                        return this.lastName + '-' + this.firstName;
+                    },
+                    set(value){
+                        let split = value.split('-');
+                        this.lastName = split[0]
+                        this.firstName = split[1]
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

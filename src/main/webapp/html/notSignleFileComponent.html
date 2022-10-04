@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../vuejs/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <hr/>
+    <School></School>
+    <hr/>
+    <Student></Student>
+    <hr/>
+    <student></student>
+</div>
+
+<script>
+    //阻止vue启动时生成生产提示
+    Vue.config.productionTip = false;
+
+    const school = Vue.extend({
+        template:"<div><h1>{{name}}</h1>\n" +
+            "<h1>{{address}}</h1></div>",
+        data(){
+            return{
+                name:"上海第二工业大学",
+                address:"浦东新区金海路"
+            }
+        }
+    });
+    const student = Vue.extend({
+        template:"<div><h1>{{name}}</h1>\n" +
+            "<h1>{{age}}</h1></div>",
+        data(){
+            return{
+                name:"李华",
+                age:20
+            }
+        }
+    });
+    const vm = new Vue({
+        el:"#app",
+        data(){
+            return{
+                msg:"你好啊！"
+            }
+        },
+        components:{
+            School:school,
+            Student:student
+        }
+    });
+</script>
+
+</body>
+</html>

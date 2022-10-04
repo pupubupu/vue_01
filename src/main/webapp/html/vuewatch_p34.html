@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue监视原理</title>
+    <script type="text/javascript" src="../vuejs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script>
+        let data = {
+            name:"上海第二工业大学",
+            address:"金海路2360"
+        }
+
+        let obs = new Observer(data)
+
+        function Observer(data){
+            var allkeys = Object.keys(data);
+            allkeys.forEach((key)=>{
+                Object.defineProperty(this,key,{
+                    get(){
+                        console.log('getter被调用了')
+                        return data[key]
+                    },
+                    set(val){
+                        console.log('setter被调用了')
+                        data[key] = val
+                    }
+                })
+            })
+        }
+
+        vm._data = data = obs
+
+
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+
+                }
+            },
+            methods:{
+
+            },
+        })
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

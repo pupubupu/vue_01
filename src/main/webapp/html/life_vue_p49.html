@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vuejs/vue.js"></script>
+</head>
+<body>
+    <div id="root" :x="n">
+        <h2>123</h2>
+        <button @click="add">点我n+1</button>
+        <button @click="bye">销毁vue</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false //阻止vue在启动时生成生产提示。
+
+        new Vue({
+            el:"#root",
+            // template:`<div><h2>123</h2>\n
+            //            <button @click="add">点我n+1</button></div>`,
+            data(){
+                return{
+                    n:1
+                }
+            },
+            methods:{
+                add(){
+                    console.log('n++')
+                    this.n++;
+                },
+                bye(){
+                    this.$destroy()
+                }
+            },
+            created(){
+                document.querySelector('h2').innerText = '当前值是：{{n}}'
+            },
+            updated(){
+                console.log('更新了')
+                this.n++;
+            }
+        })
+    </script>
+</body>
+</html>

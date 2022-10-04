@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表过滤</title>
+    <script type="text/javascript" src="../vuejs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>人员列表</h1>
+        <input type="text" v-model="keyword"><br/>
+        <ul>
+            <li v-for="(p,index) in persons" v-show="p.display === true">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data(){
+                return{
+                    persons:[
+                        {
+                            name:'马冬梅',
+                            age:19,
+                            sex:'女',
+                            display:true
+                        },
+                        {
+                            name:'周冬雨',
+                            age:20,
+                            sex:'女',
+                            display:true
+                        },
+                        {
+                            name:'周杰伦',
+                            age:21,
+                            sex:'男',
+                            display:true
+                        },
+                        {
+                            name:'温兆伦',
+                            age:19,
+                            sex:'男',
+                            display:true
+                        }
+                    ],
+                    keyword:''
+                }
+            },
+            methods:{
+
+            },
+            computed:{
+
+            },
+            watch:{
+                keyword: {
+                    handler(newValue, oldValue) {
+                        //初始化
+                        for (let i = 0; i < this.persons.length; i++) {
+                            this.persons[i].display = true;
+                        }
+                        //如果没有输入，则直接返回
+                        if (newValue === '')return
+                        //根据输入内容查询
+                        for (let i = 0; i < this.persons.length; i++) {
+                            if (this.persons[i].name.indexOf(newValue) == -1){
+                                this.persons[i].display = '';
+                            }
+                        }
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>
